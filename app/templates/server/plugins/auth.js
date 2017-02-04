@@ -6,9 +6,9 @@ const moment = require('moment')
 const register = function register (server, options, next) {
   server.register(hapiJwt)
 
-  validateFunc = async (decoded, request, callback) => {
+  const validateFunc = async (decoded, request, callback) => {
     let {userId, expire} = decoded
-    user = await models.User.findOne({where: {id: userId}})
+    let user = await models.User.findOne({where: {id: userId}})
     if(!user){
       return callback('cannot found user', false)
     }
@@ -21,11 +21,11 @@ const register = function register (server, options, next) {
   }
 
   server.auth.strategy('jwt', 'jwt',
-  {
-    key: secret,
-    validateFunc: validateFunc,
-    headerKey: 'token'
-  })
+    {
+      key: secret,
+      validateFunc: validateFunc,
+      headerKey: 'token'
+    })
 
   next()
 }

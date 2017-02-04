@@ -1,22 +1,22 @@
-'use strict';
+'use strict'
 
 exports.register = function (server, options, next) {
 
-    server.route({
-        method: 'GET',
-        path: '/',
-        handler: function (request, reply) {
+  server.route({
+    method: 'GET',
+    path: '/',
+    handler: function (request, reply) {
 
-            return reply.view('index');
-        }
-    });
+      return reply.view('index')
+    }
+  })
 
 
-    next();
-};
+  next()
+}
 
 
 exports.register.attributes = {
-    name: 'web',
-    dependencies: 'visionary'
-};
+  name: 'web',
+  dependencies: 'visionary'
+}
