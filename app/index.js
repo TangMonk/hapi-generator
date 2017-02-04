@@ -110,6 +110,11 @@ module.exports = Generators.Base.extend({
           this.destinationPath(`${this.appName}/server/plugins`)
         )
 
+        this.fs.copy(
+          this.templatePath('.eslint*'),
+          this.destinationPath(`${this.appName}/`)
+        )
+
         const serverApiDir = Path.join(serverDir, 'api');
         Mkdirp.sync(Path.join(this.appName, serverApiDir));
         this.copy(Path.join(serverApiDir, 'index.js'), Path.join(this.appName, serverApiDir, 'index.js'));
