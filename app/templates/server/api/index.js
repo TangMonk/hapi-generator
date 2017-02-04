@@ -1,21 +1,12 @@
-'use strict';
+'use strict'
 
-exports.register = function (server, options, next) {
+exports.register = function(server, options, next) {
+  require('./user')(server)
 
-    server.route({
-        method: 'GET',
-        path: '/',
-        handler: function (request, reply) {
-
-            reply({ message: 'Welcome to the plot device.' });
-        }
-    });
-
-
-    next();
-};
+  next()
+}
 
 
 exports.register.attributes = {
-    name: 'api'
-};
+  name: 'api'
+}

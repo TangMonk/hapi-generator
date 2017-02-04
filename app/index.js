@@ -67,6 +67,7 @@ module.exports = Generators.Base.extend({
             this.gitRepo = answers.gitRepo;
             this.license = answers.license;
             this.year = new Date().getFullYear();
+            this.secret = require('crypto').randomBytes(32).toString('hex');
         });
     },
     github: function () {
@@ -88,12 +89,31 @@ module.exports = Generators.Base.extend({
 
         Mkdirp.sync(this.appName);
 
+        const dbDir = Path.join('db');
+        Mkdirp.sync(Path.join(this.appName, dbDir));
+        Mkdirp.sync(Path.join(this.appName, dbDir, 'seeders'));
+        this.fs.copy(
+          this.templatePath('db'),
+          this.destinationPath(`${this.appName}/db`)
+        )
+
         const serverDir = Path.join('server');
         Mkdirp.sync(Path.join(this.appName, serverDir));
+
+        this.fs.copy(
+          this.templatePath('server/models'),
+          this.destinationPath(`${this.appName}/server/models`)
+        )
+
+        this.fs.copy(
+          this.templatePath('server/plugins'),
+          this.destinationPath(`${this.appName}/server/plugins`)
+        )
 
         const serverApiDir = Path.join(serverDir, 'api');
         Mkdirp.sync(Path.join(this.appName, serverApiDir));
         this.copy(Path.join(serverApiDir, 'index.js'), Path.join(this.appName, serverApiDir, 'index.js'));
+        this.copy(Path.join(serverApiDir, 'user.js'), Path.join(this.appName, serverApiDir, 'user.js'));
 
         const serverWebDir = Path.join(serverDir, 'web');
         Mkdirp.sync(Path.join(this.appName, serverWebDir));
@@ -132,5 +152,7 @@ module.exports = Generators.Base.extend({
         this.copy('index.js', Path.join(this.appName, 'index.js'));
         this.copy('manifest.js', Path.join(this.appName, 'manifest.js'));
         this.copy('server.js', Path.join(this.appName, 'server.js'));
+
+        this.copy('.sequelizerc', Path.join(this.appName, '.sequelizerc'));
     }
 });

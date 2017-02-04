@@ -17,7 +17,26 @@ const config = {
             test: 9090,
             $default: 8080
         }
-    }
+    },
+    production: {
+        database: 'music_prod',
+        username: 'root',
+        password: 'root',
+        options: {
+            host: 'localhost',
+            dialect: 'mysql'
+        }
+    },
+    '$filter': 'env',
+    '$default': {
+        database: 'music_dev',
+        username: 'tangmonk',
+        password: '',
+        options: {
+            host: 'localhost',
+            dialect: 'postgres'
+        }
+    },
 };
 
 

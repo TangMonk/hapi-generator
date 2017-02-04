@@ -2,7 +2,7 @@
 
 const Confidence = require('confidence');
 const Config = require('./config');
-
+const heredoc = require('heredoc')
 
 const criteria = {
     env: process.env.NODE_ENV
@@ -39,8 +39,33 @@ const manifest = {
             }
         },
         {
+            plugin: 'inert'
+        },
+        {
             plugin: './server/web/index'
-        }
+        },
+
+        {
+            plugin: {
+              register: 'hapi-swagger',
+              options: {
+                info: {
+                  title: '开发文档',
+                  description: heredoc.strip(() => { /*
+                    ## Document
+                  */})
+                },
+                tags: [
+                  {
+                    name: 'user',
+                    description: '用户操作'
+                  },
+                ],
+                basePath: '/api',
+                pathPrefixSize: 2,
+              }
+            }
+        },
     ]
 };
 
