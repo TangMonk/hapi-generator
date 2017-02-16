@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "<%= dbUsername %>",
+    "password": "<%= dbPassword %>",
+    "database": "<%= appName %>_development",
+    "host": "<%= dbHost %>",
+    "dialect": "<%= dbDialect %>"
+  },
+  "test": {
+    "username": "<%= dbUsername %>",
+    "password": "<%= dbPassword %>",
+    "database": "<%= appName %>_test",
+    "host": "<%= dbHost %>",
+    "dialect": "<%= dbDialect %>"
+  },
+  "production": {
+    "username": "<%= dbUsername %>",
+    "password": "<%= dbPassword %>",
+    "database": "<%= appName %>_production",
+    "host": "<%= dbHost %>",
+    "dialect": "<%= dbDialect %>"
+  }
+}

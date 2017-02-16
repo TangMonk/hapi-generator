@@ -10,7 +10,7 @@ const default_criteria = {
 
 const config = {
   $meta: 'This file configures the plot device.',
-  projectName: 'music',
+  projectName: '<%= appName %>',
   port: {
     web: {
       $filter: 'env',
@@ -23,36 +23,6 @@ const config = {
     production: '<%= secret %>',
     $default: '<%= secret %>',
     '$filter': 'env',
-  },
-  database: {
-    production: {
-      database: 'music_prod',
-      username: 'root',
-      password: 'root',
-      options: {
-        host: 'localhost',
-        dialect: 'mysql'
-      }
-    },
-    test: {
-      database: 'music_test',
-      username: 'root',
-      password: 'root',
-      options: {
-        host: 'localhost',
-        dialect: 'mysql'
-      }
-    },
-    '$filter': 'env',
-    '$default': {
-      database: 'music_dev',
-      username: 'tangmonk',
-      password: '',
-      options: {
-        host: 'localhost',
-        dialect: 'postgres'
-      }
-    },
   }
 }
 

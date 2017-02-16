@@ -57,15 +57,35 @@ module.exports = Generators.Base.extend({
             name: 'license',
             message: 'License',
             default: 'MIT'
+        }, {
+            name: 'dbUsername',
+            message: 'database_username',
+            default: 'postgres'
+        }, {
+            name: 'dbPassword',
+            message: 'database_password',
+            default: null
+        }, {
+            name: 'dbHost',
+            message: 'database_host',
+            default: '127.0.0.1'
+        }, {
+            name: 'dbDialect',
+            message: 'database_dialect',
+            default: 'postgres'
         }];
 
         return this.prompt(prompts).then((answers) => {
-
+            
             this.description = answers.description;
             this.author = answers.author;
             this.authorEmail = answers.authorEmail;
             this.gitRepo = answers.gitRepo;
             this.license = answers.license;
+            this.dbUsername = answers.dbUsername;
+            this.dbPassword = answers.dbPassword;
+            this.dbHost = answers.dbHost;
+            this.dbDialect = answers.dbDialect;
             this.year = new Date().getFullYear();
             this.secret = require('crypto').randomBytes(32).toString('hex');
         });
@@ -153,6 +173,7 @@ module.exports = Generators.Base.extend({
             this.template('_LICENSE', Path.join(this.appName, 'LICENSE'));
         }
         this.template('_package.json', Path.join(this.appName, 'package.json'));
+        this.template('_database.json', Path.join(this.appName, '/db/database.json'));
         this.template('_README.md', Path.join(this.appName, 'README.md'));
         this.copy('index.js', Path.join(this.appName, 'index.js'));
         this.copy('manifest.js', Path.join(this.appName, 'manifest.js'));
